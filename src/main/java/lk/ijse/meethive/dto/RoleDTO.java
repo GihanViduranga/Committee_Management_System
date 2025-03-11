@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class RoleDTO {
-    private Long roleId;
+    private int roleId;
     private String role;
     private List<User> users;
     private List<Member> members;

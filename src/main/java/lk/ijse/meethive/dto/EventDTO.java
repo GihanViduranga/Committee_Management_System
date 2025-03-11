@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EventDTO {
-    private Long eventId;
+    private int eventId;
     private String eventTitle;
     private String description;
     private LocalDateTime startDateTime;

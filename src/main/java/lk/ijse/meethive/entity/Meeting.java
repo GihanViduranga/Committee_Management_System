@@ -18,7 +18,7 @@ import java.util.List;
 public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long meetingId;
+    private int meetingId;
 
     private String meetingTitle;
     private LocalDate meetingDate;

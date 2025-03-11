@@ -17,7 +17,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private int userId;
 
     private String fullName;
     private LocalDate birthday;
@@ -25,10 +25,11 @@ public class User {
     private String phoneNumber;
     private String email;
     private String password;
+    private String role;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
-    private Role role;
+    private Role roles;
 
     @ManyToMany
     @JoinTable(

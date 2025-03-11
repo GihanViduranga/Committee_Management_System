@@ -17,14 +17,15 @@ import java.util.List;
 @Getter
 @Setter
 public class UserDTO {
-    private Long userId;
+    private int userId;
     private String fullName;
     private LocalDate birthday;
     private String address;
     private String phoneNumber;
     private String email;
     private String password;
-    private Role role;
+    private String role;
+    private Role roles;
     private List<Member> members;
     private List<Event> events;
     private Registration registration;

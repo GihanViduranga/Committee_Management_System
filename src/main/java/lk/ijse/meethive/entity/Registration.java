@@ -16,13 +16,15 @@ import java.time.LocalDate;
 public class Registration {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long registrationId;
+    private int registrationId;
 
     private String fullName;
     private LocalDate birthday;
     private String address;
     private String phoneNumber;
     private String email;
+    private String password;
+    private String role;
 
     @OneToOne(mappedBy = "registration")
     private User user;

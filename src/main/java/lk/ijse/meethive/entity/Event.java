@@ -17,7 +17,7 @@ import java.util.List;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long eventId;
+    private int eventId;
 
     private String eventTitle;
     private String description;

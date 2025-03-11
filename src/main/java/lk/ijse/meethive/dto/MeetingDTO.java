@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 public class MeetingDTO {
-    private Long meetingId;
+    private int meetingId;
     private String meetingTitle;
     private LocalDate meetingDate;
     private LocalTime meetingTime;

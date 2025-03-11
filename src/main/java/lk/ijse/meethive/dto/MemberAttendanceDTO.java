@@ -15,7 +15,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class MemberAttendanceDTO {
-    private Long memberAttendanceId;
+    private int memberAttendanceId;
     private LocalDate date;
     private LocalTime time;
     private Member member;

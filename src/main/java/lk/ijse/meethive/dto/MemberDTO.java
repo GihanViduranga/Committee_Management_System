@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 public class MemberDTO {
-    private Long memberId;
+    private int memberId;
     private String fullName;
     private LocalDate birthday;
     private String address;

@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EventTypeDTO {
-    private Long eventTypeId;
+    private int eventTypeId;
     private String eventType;
     private String description;
     private List<Event> events;

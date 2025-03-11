@@ -13,11 +13,13 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class RegistrationDTO {
-    private Long registrationId;
+    private int registrationId;
     private String fullName;
     private LocalDate birthday;
     private String address;
     private String phoneNumber;
     private String email;
+    private String password;
+    private String role;
     private User user;
 }

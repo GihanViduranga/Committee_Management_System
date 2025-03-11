@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class EventFacilityDTO {
-    private Long eventFacilityId;
+    private int eventFacilityId;
     private String facilityName;
     private Integer qty;
     private Double price;

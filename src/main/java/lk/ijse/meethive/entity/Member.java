@@ -17,7 +17,7 @@ import java.util.List;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;
+    private int memberId;
 
     private String fullName;
     private LocalDate birthday;
