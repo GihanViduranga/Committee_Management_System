@@ -7,7 +7,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.meethive.service.impl.RegistrationServiceImpl;
+import lk.ijse.meethive.service.impl.UserServiceImpl;
 import lk.ijse.meethive.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +25,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtil jwtUtil;
     @Autowired
-    private RegistrationServiceImpl registrationService;
+    private UserServiceImpl userService;
     @Value("${jwt.secret}")
     private String secretKey;
 
@@ -47,7 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (null != email && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails
-                    = registrationService.loadUserByUsername(email);
+                    = userService.loadUserByUsername(email);
 
             if (jwtUtil.validateToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken

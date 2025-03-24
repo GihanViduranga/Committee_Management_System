@@ -3,7 +3,7 @@ package lk.ijse.meethive.util;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lk.ijse.meethive.dto.RegistrationDTO;
+import lk.ijse.meethive.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,10 +62,15 @@ public class JwtUtil implements Serializable {
 
 
     //generate token for user
-    public String generateToken(RegistrationDTO registrationDTO) {
+    public String generateToken(UserDTO userDTO) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role",registrationDTO.getRole());
-        return doGenerateToken(claims, registrationDTO.getEmail());
+        claims.put("role",userDTO.getRole());
+        return doGenerateToken(claims, userDTO.getEmail());
+    }
+    public String generateTokenForUser(UserDTO userDTO) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role",userDTO.getRole());
+        return doGenerateToken(claims, userDTO.getEmail());
     }
 
     //while creating the token -
@@ -85,5 +90,11 @@ public class JwtUtil implements Serializable {
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    }
+
+    public String generateUserToken(UserDTO loadedUser) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("role",loadedUser.getRole());
+        return doGenerateToken(claims, loadedUser.getEmail());
     }
 }
