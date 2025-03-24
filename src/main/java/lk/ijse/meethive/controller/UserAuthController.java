@@ -1,6 +1,5 @@
 package lk.ijse.meethive.controller;
 
-
 import lk.ijse.meethive.dto.AuthDTO;
 import lk.ijse.meethive.dto.ResponseDTO;
 import lk.ijse.meethive.dto.UserDTO;
@@ -11,19 +10,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin("*")
 @RestController
-@RequestMapping("api/v1/auth")
-public class AuthController {
-
+@RequestMapping("api/v1/userAuth")
+public class UserAuthController {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
     private final UserServiceImpl userService;
     private final ResponseDTO responseDTO;
 
-    public AuthController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, UserServiceImpl userService, ResponseDTO responseDTO) {
+    public UserAuthController(JwtUtil jwtUtil, AuthenticationManager authenticationManager, UserServiceImpl userService, ResponseDTO responseDTO) {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
         this.userService = userService;
@@ -46,7 +46,7 @@ public class AuthController {
                     .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
         }
 
-        String token = jwtUtil.generateToken(loadedUser);
+        String token = jwtUtil.generateUserToken(loadedUser);
         if (token == null || token.isEmpty()) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(new ResponseDTO(VarList.Conflict, "Authorization Failure! Please Try Again", null));
@@ -59,6 +59,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(new ResponseDTO(VarList.Created, "Success", authDTO));
     }
-
 }
-

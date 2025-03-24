@@ -2,8 +2,7 @@ package lk.ijse.meethive.dto;
 
 import lk.ijse.meethive.entity.Event;
 import lk.ijse.meethive.entity.Member;
-import lk.ijse.meethive.entity.Registration;
-import lk.ijse.meethive.entity.Role;
+import lk.ijse.meethive.entity.MemberFee;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,8 +24,5 @@ public class UserDTO {
     private String email;
     private String password;
     private String role;
-    private Role roles;
-    private List<Member> members;
-    private List<Event> events;
-    private Registration registration;
+    private boolean isActive;
 }

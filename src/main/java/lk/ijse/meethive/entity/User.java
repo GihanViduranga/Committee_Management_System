@@ -26,23 +26,14 @@ public class User {
     private String email;
     private String password;
     private String role;
+    private boolean isActive;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role roles;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_member",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "member_id")
-    )
-    private List<Member> members;
+    @OneToMany
+    @JoinColumn(name = "feeId")
+    private List<MemberFee> memberFee;
 
     @OneToMany(mappedBy = "user")
     private List<Event> events;
 
-    @OneToOne
-    @JoinColumn(name = "registration_id")
-    private Registration registration;
+    // isActive
 }
