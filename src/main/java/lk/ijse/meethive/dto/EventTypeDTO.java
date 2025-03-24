@@ -16,5 +16,4 @@ public class EventTypeDTO {
     private int eventTypeId;
     private String eventType;
     private String description;
-    private List<Event> events;
 }
