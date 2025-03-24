@@ -26,3 +26,4 @@ public class EventFacility {
     @ManyToMany(mappedBy = "eventFacilities")
     private List<Event> events;
 }
+
