@@ -141,4 +141,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new RuntimeException("User not found with email: " + email);
         }
     }
+
+    @Override
+    public List<String> getUserEmails() {
+        return userRepository.getUserEmails();
+    }
+
+
 }
