@@ -1,7 +1,6 @@
 package lk.ijse.meethive.service.impl;
 
 import lk.ijse.meethive.dto.EventFacilityDTO;
-import lk.ijse.meethive.dto.EventTypeDTO;
 import lk.ijse.meethive.dto.ResponseDTO;
 import lk.ijse.meethive.entity.EventFacility;
 import lk.ijse.meethive.repo.EventFacilityRepo;
@@ -25,15 +24,6 @@ public class EventFacilityImpl implements EventFacilityService {
     @Autowired
     private ModelMapper modelMapper;
 
-
-    @Override
-    public void saveEvent(EventFacilityDTO eventFacilityDTO) {
-        if (eventFacilityRepo.existsById(String.valueOf(eventFacilityDTO.getEventFacilityId()))){
-            throw new RuntimeException("Event Facility already exists.");
-        }
-        eventFacilityRepo.save(modelMapper.map(eventFacilityDTO, EventFacility.class));
-    }
-
     @Override
     public void updateEvent(EventFacilityDTO eventFacilityDTO) {
         try {
@@ -53,6 +43,23 @@ public class EventFacilityImpl implements EventFacilityService {
     public List<EventFacilityDTO> getAllEventFacilities() {
         return modelMapper.map(eventFacilityRepo.findAll(),
                 new TypeToken<List<EventFacilityDTO>>() {}.getType());
+    }
+
+    @Override
+    public void saveEventFacility(EventFacilityDTO eventFacilityDTO) {
+        if (eventFacilityRepo.existsById(String.valueOf(eventFacilityDTO.getEventFacilityId()))){
+            throw new RuntimeException("Event Facility already exists.");
+        }
+        eventFacilityRepo.save(modelMapper.map(eventFacilityDTO, EventFacility.class));
+    }
+
+    @Override
+    public void deleteEventFacility(int id) {
+        if (eventFacilityRepo.existsById(String.valueOf(id))) {
+            eventFacilityRepo.deleteById(String.valueOf(id));
+        }else {
+            throw new RuntimeException("Event Facility does not exist.");
+        }
     }
 
 

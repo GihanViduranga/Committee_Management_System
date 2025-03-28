@@ -15,8 +15,7 @@ import java.util.List;
 public class EventFacilityDTO {
     private int eventFacilityId;
     private String facilityName;
-    private Integer qty;
-    private Double price;
-    private List<Event> events;
+    private String description;
+    private int qty;
 
 }

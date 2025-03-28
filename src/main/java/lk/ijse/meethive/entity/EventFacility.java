@@ -20,10 +20,8 @@ public class EventFacility {
     private int eventFacilityId;
 
     private String facilityName;
-    private Integer qty;
-    private Double price;
+    private String description;
+    private int qty;
 
-    @ManyToMany(mappedBy = "eventFacilities")
-    private List<Event> events;
 }
 

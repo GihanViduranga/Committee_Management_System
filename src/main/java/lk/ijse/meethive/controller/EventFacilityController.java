@@ -3,7 +3,6 @@ package lk.ijse.meethive.controller;
 import lk.ijse.meethive.dto.EventFacilityDTO;
 import lk.ijse.meethive.dto.ResponseDTO;
 import lk.ijse.meethive.service.EventFacilityService;
-import lk.ijse.meethive.util.ResponseUtil;
 import lk.ijse.meethive.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +18,40 @@ public class EventFacilityController {
     private EventFacilityService eventFacilityService;
 
     @PostMapping("/save")
-    public ResponseUtil saveEventsFacility(@RequestBody EventFacilityDTO eventFacilityDTO) {
-        eventFacilityService.saveEvent(eventFacilityDTO);
-        return new ResponseUtil(200, "savd", null);
+    public ResponseEntity<ResponseDTO> saveEventsFacility(@RequestBody EventFacilityDTO eventFacilityDTO) {
+        try {
+            eventFacilityService.saveEventFacility(eventFacilityDTO);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ResponseDTO(VarList.Created,"EventFacility saved successfully",null));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
+        }
+
     }
 
     @PutMapping("/update")
-    public ResponseUtil updateEventsFacility(@RequestBody EventFacilityDTO eventFacilityDTO) {
-        eventFacilityService.updateEvent(eventFacilityDTO);
-        return new ResponseUtil(200, "updated", null);
+    public ResponseEntity<ResponseDTO> updateEventsFacility(@RequestBody EventFacilityDTO eventFacilityDTO) {
+        try {
+            eventFacilityService.updateEvent(eventFacilityDTO);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ResponseDTO(VarList.Created,"EventFacility updated",null));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<ResponseDTO> deleteEventsFacility(@PathVariable int id) {
+        try {
+            eventFacilityService.deleteEventFacility(id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.Created,"EventFacility deleted",null));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
+        }
     }
 
     @GetMapping("/getAll")

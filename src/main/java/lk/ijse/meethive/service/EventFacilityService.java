@@ -5,10 +5,12 @@ import lk.ijse.meethive.dto.EventFacilityDTO;
 import java.util.List;
 
 public interface EventFacilityService {
-    void saveEvent(EventFacilityDTO eventFacilityDTO);
 
     void updateEvent(EventFacilityDTO eventFacilityDTO);
 
     List<EventFacilityDTO> getAllEventFacilities();
 
+    void saveEventFacility(EventFacilityDTO eventFacilityDTO);
+
+    void deleteEventFacility(int id);
 }
