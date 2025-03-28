@@ -4,6 +4,7 @@ import lk.ijse.meethive.dto.EventTypeDTO;
 import lk.ijse.meethive.dto.ResponseDTO;
 import lk.ijse.meethive.entity.EventType;
 import lk.ijse.meethive.repo.EventTypeRepo;
+import lk.ijse.meethive.service.EventFacilityService;
 import lk.ijse.meethive.service.EventTypeService;
 import lk.ijse.meethive.util.VarList;
 import org.modelmapper.ModelMapper;
@@ -54,5 +55,14 @@ public class EventTypeImpl implements EventTypeService {
     public List<EventTypeDTO> getAllEventTypes() {
         return modelMapper.map(eventTypeRepo.findAll(),
                     new TypeToken<List<EventTypeDTO>>() {}.getType());
+    }
+
+    @Override
+    public void deleteEventType(int id) {
+        if (eventTypeRepo.existsById(String.valueOf(id))) {
+            eventTypeRepo.deleteById(String.valueOf(id));
+        }else {
+            throw new RuntimeException("Event Type ID not exists");
+        }
     }
 }

@@ -50,4 +50,16 @@ public class EventTypeController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
         }
     }
+
+    @PostMapping("/delete/{id}")
+    public ResponseEntity<ResponseDTO> deleteEventType(@PathVariable int id){
+        try {
+            eventTypeService.deleteEventType(id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.Created,"Event Type Is Deleted",null));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
+        }
+    }
 }

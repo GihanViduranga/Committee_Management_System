@@ -10,4 +10,6 @@ public interface EventTypeService {
     void updateEventType(EventTypeDTO eventTypeDTO);
 
     List<EventTypeDTO> getAllEventTypes();
+
+    void deleteEventType(int id);
 }
