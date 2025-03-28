@@ -1,6 +1,6 @@
 package lk.ijse.meethive.dto;
 
-import lk.ijse.meethive.entity.MemberAttendance;
+import lk.ijse.meethive.entity.MeetingAttendance;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,5 +20,5 @@ public class MeetingDTO {
     private LocalDate meetingDate;
     private LocalTime meetingTime;
     private String description;
-    private List<MemberAttendance> memberAttendances;
+    private List<MeetingAttendance> memberAttendances;
 }

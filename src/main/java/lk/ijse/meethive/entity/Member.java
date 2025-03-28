@@ -20,17 +20,14 @@ public class Member {
     private int memberId;
 
     private String fullName;
-    private LocalDate birthday;
-    private String address;
-    private String phoneNumber;
+    private LocalDate joinDate;
+    private String nic;
+    private String positionsHeld;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @JoinColumn(name = "user_Id")
+    private User user;
 
-    @ManyToMany(mappedBy = "members")
-    private List<User> users;
-
-    @OneToMany(mappedBy = "member")
-    private List<MemberAttendance> memberAttendances;
+    /*@OneToMany(mappedBy = "member")
+    private List<MeetingAttendance> memberAttendances;*/
 }

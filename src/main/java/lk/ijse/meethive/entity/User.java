@@ -32,8 +32,11 @@ public class User {
     @JoinColumn(name = "feeId")
     private List<MemberFee> memberFee;
 
+    /*@OneToMany(mappedBy = "user")
+    private List<Event> events;*/
+
     @OneToMany(mappedBy = "user")
-    private List<Event> events;
+    private List<Event_Participation> eventParticipants;
 
     // isActive
 }

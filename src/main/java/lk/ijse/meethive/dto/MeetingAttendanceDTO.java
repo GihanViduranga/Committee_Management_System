@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class MemberAttendanceDTO {
+public class MeetingAttendanceDTO {
     private int memberAttendanceId;
     private LocalDate date;
     private LocalTime time;

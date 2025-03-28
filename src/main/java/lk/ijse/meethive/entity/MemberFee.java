@@ -6,27 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-public class MemberAttendance {
+public class MemberFee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int memberAttendanceId;
+    private int feeId;
 
-    private LocalDate date;
-    private LocalTime time;
+    private String description;
+    private String date;
+    private String paymentMethod;
+    private String Price;
+
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @ManyToOne
-    @JoinColumn(name = "meeting_id")
-    private Meeting meeting;
+    @JoinColumn(name = "user_id")
+    private User users;
 }

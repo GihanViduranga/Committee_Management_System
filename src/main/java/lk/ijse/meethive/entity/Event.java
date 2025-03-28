@@ -25,13 +25,9 @@ public class Event {
     private LocalDateTime endDateTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
 
-    @ManyToMany
-    private List<EventFacility> eventFacilities;
+    @OneToMany(mappedBy = "event")
+    private List<Event_Participation> eventParticipants;
 }

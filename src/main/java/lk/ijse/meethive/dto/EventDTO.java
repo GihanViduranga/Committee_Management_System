@@ -1,6 +1,7 @@
 package lk.ijse.meethive.dto;
 
 import lk.ijse.meethive.entity.EventFacility;
+import lk.ijse.meethive.entity.EventFacilityDetails;
 import lk.ijse.meethive.entity.EventType;
 import lk.ijse.meethive.entity.User;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,9 @@ public class EventDTO {
     private String description;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private User user;
-    private EventType eventType;
-    private List<EventFacility> eventFacilities;
+    private int eventType_Id;
+    private int userId;
+    private int facilityId;
+
+    private List<EventFacilityDetailsDTO> eventFacilities;
 }
