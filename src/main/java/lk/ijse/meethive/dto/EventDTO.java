@@ -23,8 +23,7 @@ public class EventDTO {
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
     private int eventType_Id;
-    private int userId;
-    private int facilityId;
 
+    private EventTypeDTO eventTypeDTO;
     private List<EventFacilityDetailsDTO> eventFacilities;
 }

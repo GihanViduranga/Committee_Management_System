@@ -1,16 +1,19 @@
 package lk.ijse.meethive.controller;
 
 import lk.ijse.meethive.dto.EventDTO;
+import lk.ijse.meethive.dto.EventFacilityDTO;
 import lk.ijse.meethive.dto.ResponseDTO;
+import lk.ijse.meethive.service.EventFacilityService;
 import lk.ijse.meethive.service.EventService;
+import lk.ijse.meethive.util.ResponseUtil;
 import lk.ijse.meethive.util.VarList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/event")
@@ -20,10 +23,14 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @Autowired
+    private EventFacilityService eventFacilityService;
+
     @PostMapping("/save")
-    public ResponseEntity<ResponseDTO> saveEvent(EventDTO eventDTO) {
+    public ResponseEntity<ResponseDTO> saveEvent(@RequestBody EventDTO eventDTO) {
         try {
             eventService.saveEvent(eventDTO);
+
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new ResponseDTO(VarList.Created,"Event created",null));
         }catch (Exception e) {

@@ -13,4 +13,8 @@ public interface EventFacilityService {
     void saveEventFacility(EventFacilityDTO eventFacilityDTO);
 
     void deleteEventFacility(int id);
+
+    EventFacilityDTO findEventFacilityById(int eventFacilityId);
+
+    List<String> getAllEventFacilityIds();
 }

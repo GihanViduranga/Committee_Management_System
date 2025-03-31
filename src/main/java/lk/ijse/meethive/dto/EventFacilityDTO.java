@@ -1,21 +1,28 @@
 package lk.ijse.meethive.dto;
 
 import lk.ijse.meethive.entity.Event;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
-
-@NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
+@Data
 public class EventFacilityDTO {
     private int eventFacilityId;
     private String facilityName;
     private String description;
     private int qty;
 
+    public EventFacilityDTO(String facilityName, String description, int qty) {
+        this.facilityName = facilityName;
+        this.description = description;
+        this.qty = qty;
+    }
+
+    /*public EventFacilityDTO(int eventFacilityId, String facilityName, String description, int qty) {
+        this.eventFacilityId = eventFacilityId;
+        this.facilityName = facilityName;
+        this.description = description;
+        this.qty = qty;
+    }*/
 }

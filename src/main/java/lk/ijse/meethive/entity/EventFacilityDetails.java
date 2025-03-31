@@ -16,7 +16,10 @@ public class EventFacilityDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int eventFacilityDetailsId;
+    @Temporal(TemporalType.DATE)
     private Date date;
+
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
@@ -25,4 +28,12 @@ public class EventFacilityDetails {
     @ManyToOne
     @JoinColumn(name = "eventFacility_id")
     private EventFacility eventFacility;
+
+    @PrePersist
+    protected void onCreate() {
+        if (this.date == null) {
+            this.date = new Date();  // Sets current date automatically
+        }
+    }
+
 }

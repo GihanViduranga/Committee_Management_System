@@ -14,6 +14,7 @@ import java.util.Date;
 public class EventFacilityDetailsDTO {
     private int eventFacilityDetailsId;
     private Date date;
+    private int Qty;
 
     private int eventFacilityID;
     private int eventId;

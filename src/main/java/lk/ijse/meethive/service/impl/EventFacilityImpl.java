@@ -62,5 +62,19 @@ public class EventFacilityImpl implements EventFacilityService {
         }
     }
 
+    @Override
+    public EventFacilityDTO findEventFacilityById(int eventFacilityId) {
+        if (eventFacilityRepo.existsById(String.valueOf(eventFacilityId))){
+            return eventFacilityRepo.findEventFacilityById(String.valueOf(eventFacilityId));
+        }else {
+            throw new RuntimeException("Cannot find Event FacilityId");
+        }
+    }
+
+    @Override
+    public List<String> getAllEventFacilityIds() {
+        return eventFacilityRepo.getAllEventFacilityIds();
+    }
+
 
 }

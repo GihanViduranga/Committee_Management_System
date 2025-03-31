@@ -23,11 +23,13 @@ public class Event {
     private String description;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-
     @ManyToOne
     @JoinColumn(name = "event_type_id")
     private EventType eventType;
 
+
     @OneToMany(mappedBy = "event")
     private List<Event_Participation> eventParticipants;
+
+
 }
