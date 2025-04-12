@@ -13,19 +13,27 @@ import java.util.List;
 
 @Repository
 public interface EventFacilityRepo extends JpaRepository<EventFacility , String> {
-   /* @Modifying
+    /*@Modifying
     @Query("UPDATE EventFacility e SET e.qty = e.qty - :quantity WHERE e.eventFacilityId = :eventFacilityId")
     void updateQty(@org.springframework.data.repository.query.Param("quantity") int quantity,
-                   @org.springframework.data.repository.query.Param("eventFacilityId") String eventFacilityId);
-*/
+                   @org.springframework.data.repository.query.Param("eventFacilityId") String eventFacilityId);*/
    @Modifying
    @Transactional
    @Query("UPDATE EventFacility e SET e.qty = e.qty - :quantity WHERE e.eventFacilityId = :eventFacilityId AND e.qty >= :quantity")
-   int updateQty(@Param("quantity") int quantity, @Param("eventFacilityId") String eventFacilityId);
+   int updateQty(@Param("quantity") int qty, @Param("eventFacilityId") String eventFacilityId);
 
     @Query("SELECT new lk.ijse.meethive.dto.EventFacilityDTO(e.facilityName, e.description, e.qty) FROM EventFacility e WHERE e.eventFacilityId = :eventFacilityId")
     EventFacilityDTO findEventFacilityById(@org.springframework.data.repository.query.Param("eventFacilityId") String eventFacilityId);
 
     @Query("SELECT e.eventFacilityId FROM EventFacility e")
     List<String> getAllEventFacilityIds();
+
+    /*@Modifying
+    @Query("UPDATE EventFacility e SET e.qty = e.qty - :quantity WHERE e.eventFacilityId = :facilityId")
+    int updateQty(@Param("quantity") int quantity, @Param("facilityId") String facilityId);
+
+    // Alternative implementation that might be more suitable
+    @Modifying
+    @Query("UPDATE EventFacility e SET e.qty = :newQuantity WHERE e.eventFacilityId = :facilityId")
+    int setQuantity(@Param("newQuantity") int newQuantity, @Param("facilityId") String facilityId);*/
 }

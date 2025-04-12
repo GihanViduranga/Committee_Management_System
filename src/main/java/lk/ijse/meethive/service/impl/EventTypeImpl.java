@@ -29,7 +29,7 @@ public class EventTypeImpl implements EventTypeService {
 
     @Override
     public void saveEventType(EventTypeDTO eventTypeDTO) {
-        if (eventTypeRepo.existsById(valueOf(eventTypeDTO.getEventTypeId()))){
+        if (eventTypeRepo.existsById(Integer.valueOf(valueOf(eventTypeDTO.getEventTypeId())))){
             throw new RuntimeException("Event Type ID already exists");
         }
         eventTypeRepo.save(modelMapper.map(eventTypeDTO, EventType.class));
@@ -38,7 +38,7 @@ public class EventTypeImpl implements EventTypeService {
     @Override
     public void updateEventType(EventTypeDTO eventTypeDTO) {
         try {
-            if (eventTypeRepo.existsById(valueOf(eventTypeDTO.getEventTypeId()))){
+            if (eventTypeRepo.existsById(Integer.valueOf(valueOf(eventTypeDTO.getEventTypeId())))){
                 eventTypeRepo.save(modelMapper.map(eventTypeDTO, EventType.class));
             }else {
                 throw new RuntimeException("Event Type ID not exists");
@@ -59,8 +59,8 @@ public class EventTypeImpl implements EventTypeService {
 
     @Override
     public void deleteEventType(int id) {
-        if (eventTypeRepo.existsById(String.valueOf(id))) {
-            eventTypeRepo.deleteById(String.valueOf(id));
+        if (eventTypeRepo.existsById(Integer.valueOf(String.valueOf(id)))) {
+            eventTypeRepo.deleteById(Integer.valueOf(String.valueOf(id)));
         }else {
             throw new RuntimeException("Event Type ID not exists");
         }

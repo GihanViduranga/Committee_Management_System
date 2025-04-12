@@ -26,4 +26,10 @@ public class EventDTO {
 
     private EventTypeDTO eventTypeDTO;
     private List<EventFacilityDetailsDTO> eventFacilities;
+
+
+    public EventDTO(int eventId, String eventTitle) {
+        this.eventId = eventId;
+        this.eventTitle = eventTitle;
+    }
 }
