@@ -53,8 +53,11 @@ public class WebSecurityConfig {
                                 "/api/v1/auth/authenticate",
                                 "/api/v1/User/registerUser",
                                 "/api/v1/auth/refreshToken",
+                                "api/v1/auth/send-otp",
+                                "api/v1/auth/verify-otp",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
+                                "/uploads/**",
                                 "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()
                 )
@@ -65,7 +68,7 @@ public class WebSecurityConfig {
 
     private CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:63342"));
+        configuration.setAllowedOrigins(List.of("http://localhost:63343"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);

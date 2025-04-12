@@ -8,14 +8,15 @@ import java.util.List;
 public interface UserService {
     int registerUser(UserDTO userDTO);
 
-    //void activateUser(UserDTO userDTO);
-
     public boolean changeUserStatus(int id, boolean status);
-    //List<UserDTO> loadUsers();
-    public List<UserDTO> getAllUsers();
-    public boolean updateUser(UserDTO userDTO);
+
+    List<UserDTO> getAllUsers();
+
+    boolean updateUser(UserDTO userDTO);
 
     boolean updateUserRole(String email, String role);
-    List<String>getUserEmails();
-    //UserDTO getUserByEmail(String email);
+
+    List<String> getUserEmails();
+
+    public UserDTO getUserProfileByEmail(String email);
 }

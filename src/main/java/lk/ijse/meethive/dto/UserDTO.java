@@ -1,5 +1,6 @@
 package lk.ijse.meethive.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lk.ijse.meethive.entity.Event;
 import lk.ijse.meethive.entity.Member;
 import lk.ijse.meethive.entity.MemberFee;
@@ -23,6 +24,12 @@ public class UserDTO {
     private String phoneNumber;
     private String email;
     private String password;
+    private String image;
     private String role;
     private boolean isActive;
+
+    public UserDTO(int userId, String email) {
+        this.userId = userId;
+        this.email = email;
+    }
 }

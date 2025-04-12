@@ -32,15 +32,31 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public UserDTO loadUserDetailsByUsername(String email) {
+   /* public UserDTO loadUserDetailsByUsername(String email) {
         User user = userRepository.findByEmail(email);
         return modelMapper.map(user, UserDTO.class);
-    }
+    }*/
+   public UserDTO loadUserDetailsByUsername(String email) {
+       User user = userRepository.findByEmail(email)
+               .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+       return modelMapper.map(user, UserDTO.class);
+   }
 
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+   /* public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
-    }
+    }*/
+   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+       User user = userRepository.findByEmail(email)
+               .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+       return new org.springframework.security.core.userdetails.User(
+               user.getEmail(),
+               user.getPassword(),
+               getAuthority(user)
+       );
+   }
+
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
@@ -130,6 +146,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public boolean updateUserRole(String email, String role) {
         try {
+            Optional<User> optionalUser = userRepository.findByEmail(email);
+            if (optionalUser.isPresent()) {
+                User user = optionalUser.get();
+                user.setRole(role);
+                userRepository.save(user);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            throw new RuntimeException("User not found with email: " + email, e);
+        }
+    }
+
+
+/*    @Override
+    public boolean updateUserRole(String email, String role) {
+        try {
             if (userRepository.findByEmail(email) != null) {
                 User user = userRepository.findByEmail(email);
                 user.setRole(role);
@@ -140,11 +173,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }catch (Exception e) {
             throw new RuntimeException("User not found with email: " + email);
         }
-    }
+    }*/
 
     @Override
     public List<String> getUserEmails() {
         return userRepository.getUserEmails();
+    }
+
+    @Override
+    public UserDTO getUserProfileByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        return modelMapper.map(user, UserDTO.class);
     }
 
 

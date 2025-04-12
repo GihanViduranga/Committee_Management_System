@@ -1,5 +1,6 @@
 package lk.ijse.meethive.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,12 +21,14 @@ public class User {
     private int userId;
 
     private String fullName;
+     @JsonFormat(pattern = "yyyy.MM.dd")
     private LocalDate birthday;
     private String address;
     private String phoneNumber;
     private String email;
     private String password;
     private String role;
+    private String image;
     private boolean isActive;
 
     @OneToMany
