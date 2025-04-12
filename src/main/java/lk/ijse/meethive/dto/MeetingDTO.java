@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +19,10 @@ public class MeetingDTO {
     private LocalDate meetingDate;
     private LocalTime meetingTime;
     private String description;
-    private List<MeetingAttendance> memberAttendances;
+    private int userId;
+
+    public MeetingDTO(int meetingId, String meetingTitle) {
+        this.meetingId = meetingId;
+        this.meetingTitle = meetingTitle;
+    }
 }

@@ -1,5 +1,6 @@
 package lk.ijse.meethive.dto;
 
+import lk.ijse.meethive.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,8 @@ import java.util.List;
 public class MemberDTO {
     private int memberId;
     private String fullName;
-    private LocalDate birthday;
-    private String address;
-    private String phoneNumber;
-    private String role;
+    private LocalDate joinDate;
+    private String nic;
+    private String positionsHeld;
+    private UserDTO user;
 }

@@ -25,7 +25,7 @@ public class Meeting {
     private LocalTime meetingTime;
     private String description;
 
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "User_id")
-    private User user;*/
+    private User user;
 }

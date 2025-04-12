@@ -29,5 +29,5 @@ public class Member {
     private User user;
 
     /*@OneToMany(mappedBy = "member")
-    private List<MeetingAttendance> memberAttendances;*/
+    private List<MeetingAttendanceController> memberAttendances;*/
 }

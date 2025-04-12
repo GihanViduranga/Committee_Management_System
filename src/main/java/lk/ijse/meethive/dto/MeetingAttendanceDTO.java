@@ -1,13 +1,14 @@
 package lk.ijse.meethive.dto;
 
 import lk.ijse.meethive.entity.Meeting;
-import lk.ijse.meethive.entity.Member;
+import lk.ijse.meethive.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @NoArgsConstructor
@@ -15,9 +16,6 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class MeetingAttendanceDTO {
-    private int memberAttendanceId;
-    private LocalDate date;
-    private LocalTime time;
-    private Member member;
-    private Meeting meeting;
+    private int userId;
+    private int meetingId;
 }

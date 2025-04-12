@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,14 +18,20 @@ public class MeetingAttendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int meetingAttendanceId;
 
-    private LocalDate date;
-    private LocalTime time;
+    @Column(nullable = false)
+    private LocalDateTime dateTime;
 
+    @PrePersist
+    protected void onCreate() {
+        if (this.dateTime == null) {
+            this.dateTime = LocalDateTime.now();
+        }
+    }
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "meeting_id")
+    @JoinColumn(name = "meetingId")
     private Meeting meeting;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 }
