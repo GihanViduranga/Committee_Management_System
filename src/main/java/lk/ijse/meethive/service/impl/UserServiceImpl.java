@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
+
 
     @Autowired
     private UserRepository userRepository;
@@ -129,10 +131,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             user.setEmail(userDTO.getEmail());
 
 
-            /*if (!userDTO.getPassword().isEmpty()) { // Update password only if provided
+            if (!userDTO.getPassword().isEmpty()) { // Update password only if provided
                 BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
                 user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-            }*/
+            }
 
             user.setRole(userDTO.getRole());
             user.setActive(userDTO.isActive());
@@ -142,6 +144,31 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return false;
     }
+
+    /*public User updateUser(int userId, User updatedUser) {
+        User existingUser = userRepository.findById(String.valueOf(userId))
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Update fields
+        existingUser.setFullName(updatedUser.getFullName());
+        existingUser.setBirthday(updatedUser.getBirthday());
+        existingUser.setAddress(updatedUser.getAddress());
+        existingUser.setPhoneNumber(updatedUser.getPhoneNumber());
+        existingUser.setEmail(updatedUser.getEmail());
+        existingUser.setRole(updatedUser.getRole());
+        existingUser.setImage(updatedUser.getImage());
+        existingUser.setActive(updatedUser.isActive());
+
+        // Encrypt and update password if changed
+        if (updatedUser.getPassword() != null &&
+                !updatedUser.getPassword().isEmpty() &&
+                !passwordEncoder.matches(updatedUser.getPassword(), existingUser.getPassword())) {
+            String encodedPassword = passwordEncoder.encode(updatedUser.getPassword());
+            existingUser.setPassword(encodedPassword);
+        }
+
+        return userRepository.save(existingUser);
+    }*/
 
     @Override
     public boolean updateUserRole(String email, String role) {
@@ -187,5 +214,27 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return modelMapper.map(user, UserDTO.class);
     }
 
+    public UserDTO getUserByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+        return convertToDto(user);
+    }
+
+    private UserDTO convertToDto(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        UserDTO dto = new UserDTO();
+        dto.setUserId(user.getUserId());
+        dto.setFullName(user.getFullName());
+        dto.setBirthday(user.getBirthday());
+        dto.setAddress(user.getAddress());
+        dto.setPhoneNumber(user.getPhoneNumber());
+        dto.setEmail(user.getEmail());
+        dto.setPassword(passwordEncoder.encode(user.getPassword()));
+        dto.setImage(user.getImage());
+        dto.setRole(user.getRole());
+        dto.setActive(user.isActive());
+        return dto;
+    }
 }

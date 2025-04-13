@@ -8,7 +8,7 @@ import java.util.List;
 public interface UserService {
     int registerUser(UserDTO userDTO);
 
-    public boolean changeUserStatus(int id, boolean status);
+    boolean changeUserStatus(int id, boolean status);
 
     List<UserDTO> getAllUsers();
 
@@ -18,5 +18,10 @@ public interface UserService {
 
     List<String> getUserEmails();
 
-    public UserDTO getUserProfileByEmail(String email);
+    UserDTO getUserProfileByEmail(String email);
+
+    UserDTO getUserByEmail(String username);
+
+    //public User updateUser(int userId, User updatedUser);
+
 }

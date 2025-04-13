@@ -194,6 +194,8 @@ public class UserController {
         }
     }
 
+
+
     @PutMapping(value = "/updateRole")
     public ResponseEntity<ResponseDTO> updateUserRole(@RequestParam String email, @RequestParam String role) {
         try {
@@ -232,6 +234,18 @@ public class UserController {
         String email = principal.getName(); // Logged-in user's email
         UserDTO userDTO = userService.getUserProfileByEmail(email);
         return ResponseEntity.ok(userDTO);
+    }
+
+    @GetMapping("/getUserByEmail/{email}")
+    public ResponseEntity<ResponseDTO> loadUserForMemberDash(@PathVariable String email){
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK,"User Loaded",userService.getUserByEmail(email)));
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ResponseDTO(VarList.Not_Found, "User Not Found", e.getMessage()));
+        }
+
     }
 
 }
