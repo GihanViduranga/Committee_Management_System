@@ -84,17 +84,12 @@ public class EventServiceImpl implements EventService {
 package lk.ijse.meethive.service.impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.meethive.dto.EventDTO;
-import lk.ijse.meethive.dto.EventFacilityDetailsDTO;
-import lk.ijse.meethive.entity.Event;
-import lk.ijse.meethive.entity.EventFacility;
-import lk.ijse.meethive.entity.EventFacilityDetails;
-import lk.ijse.meethive.entity.EventType;
-import lk.ijse.meethive.repo.EventFacilityDetailsRepo;
-import lk.ijse.meethive.repo.EventFacilityRepo;
-import lk.ijse.meethive.repo.EventRepo;
-import lk.ijse.meethive.repo.EventTypeRepo;
+import lk.ijse.meethive.dto.*;
+import lk.ijse.meethive.entity.*;
+import lk.ijse.meethive.repo.*;
 import lk.ijse.meethive.service.EventService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -116,6 +111,12 @@ public class EventServiceImpl implements EventService {
 
     @Autowired
     private EventFacilityDetailsRepo eventFacilityDetailsRepo;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /*@Transactional
     public void saveEvent(EventDTO eventDTO) {
@@ -167,6 +168,9 @@ public class EventServiceImpl implements EventService {
     }*/
     @Transactional
     public void saveEvent(EventDTO eventDTO) {
+        System.out.println("Received EventDTO: " + eventDTO);
+        System.out.println("EventType ID: " + eventDTO.getEventType_Id());
+
         Event event = new Event();
 
         EventType eventType = eventTypeRepo.findById(eventDTO.getEventType_Id())
@@ -229,6 +233,25 @@ public class EventServiceImpl implements EventService {
 
             System.out.println("Updated facility " + facilityId + " quantity to: " + newQty);
         }
+    }
+
+    @Override
+    public List<UserDTO> getAllAdminEmails() {
+        List<User> adminUsers = userRepository.findByRole("ADMIN");
+        return modelMapper.map(adminUsers,
+                new TypeToken<List<UserDTO>>() {}.getType());
+    }
+
+    @Override
+    public List<EventTypeDTO> getAllEventTypes() {
+        return modelMapper.map(eventTypeRepo.findAll(),
+                new TypeToken<List<EventTypeDTO>>() {}.getType());
+    }
+
+    @Override
+    public List<EventFacilityDTO> getAllEventFacilities() {
+        return modelMapper.map(eventFacilityRepository.findAll(),
+                new TypeToken<List<EventFacilityDTO>>() {}.getType());
     }
 
 }

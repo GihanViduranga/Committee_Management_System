@@ -38,4 +38,33 @@ public class EventController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error,e.getMessage(),null));
         }
     }
+    @GetMapping("/getAllAdminEmails")
+    public ResponseEntity<ResponseDTO> getAllAdminEmails() {
+        try {
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK,"Admin emails fetched successfully", eventService.getAllAdminEmails()));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching admin emails",e.getMessage()));
+        }
+    }
+
+    @GetMapping("/getAllEventTypes")
+    public ResponseEntity<ResponseDTO> getAllEventTypes(){
+        try {
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK,"Successfully loaded Event Types", eventService.getAllEventTypes()));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching Event Types",e.getMessage()));
+        }
+    }
+
+    @GetMapping("/getAllEventFacilities")
+    public ResponseEntity<ResponseDTO> getAllEventFacilities(){
+        try {
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK,"Successfully loaded Event Facilities",eventService.getAllEventFacilities()));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching Event Types",e.getMessage()));
+        }
+    }
 }
