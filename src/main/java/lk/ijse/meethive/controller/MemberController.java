@@ -38,4 +38,17 @@ public class MemberController {
                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Internal Server Error",e.getMessage()));
         }
     }
+
+    @GetMapping("/memberCount")
+    public ResponseEntity<ResponseDTO> getMemberCount(){
+        try {
+            int memberCount = memberService.getMemberCount();
+            System.out.println(memberCount);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK,"Member Count Loaded",memberCount));
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Internal Server Error",e.getMessage()));
+        }
+    }
 }

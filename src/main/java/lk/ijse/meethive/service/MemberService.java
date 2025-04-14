@@ -8,4 +8,6 @@ public interface MemberService {
     void addMember(MemberDTO memberDTO);
 
     List<MemberDTO> getAllMembers();
+
+    int getMemberCount();
 }

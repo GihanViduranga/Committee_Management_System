@@ -36,4 +36,9 @@ public class MemberServiceImpl implements MemberService {
                 .map(member -> modelMapper.map(member,MemberDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public int getMemberCount() {
+        return memberRepo.countAll();
+    }
 }
