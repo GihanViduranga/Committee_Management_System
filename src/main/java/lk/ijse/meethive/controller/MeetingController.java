@@ -79,4 +79,15 @@ public class MeetingController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching admin emails",e.getMessage()));
         }
     }
+
+    @GetMapping("/getMeetingCount")
+    public ResponseEntity<ResponseDTO> getMeetingCount(){
+        try {
+            int meetingCount = meetingService.getMeetingCount();
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK,"loaded meeting count", meetingCount));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching admin emails",e.getMessage()));
+        }
+    }
 }

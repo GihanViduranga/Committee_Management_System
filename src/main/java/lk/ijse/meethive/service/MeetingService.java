@@ -18,4 +18,5 @@ public interface MeetingService {
 
     List<UserDTO> getAllAdminEmails();
 
+    int getMeetingCount();
 }

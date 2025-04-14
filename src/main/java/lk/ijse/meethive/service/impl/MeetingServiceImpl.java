@@ -113,4 +113,9 @@ public class MeetingServiceImpl implements MeetingService {
         return modelMapper.map(adminUsers,
                 new TypeToken<List<UserDTO>>() {}.getType());
     }
+
+    @Override
+    public int getMeetingCount() {
+        return meetingRepo.countAllMeetings();
+    }
 }
