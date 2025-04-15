@@ -42,7 +42,7 @@
 
 ## 🎥 Link to the Demo Video
 
-🔗 [Meet Hive Demo Video]([https://www.youtube.com/watch?v=meethive-demo-video](https://youtu.be/ku-FZrL3kRw?si=szUA0y-Yvd3W6b42))
+🔗 Meet Hive Demo Video : (https://youtu.be/ku-FZrL3kRw?si=szUA0y-Yvd3W6b42)
 
 ## 🖼️ Screenshots
 
