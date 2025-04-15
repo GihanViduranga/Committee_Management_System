@@ -18,6 +18,6 @@ public class MemberFeeDTO {
     private String description;
     private String date;
     private String paymentMethod;
-    private String Price;
-    private List<User> users;
+    private String price;
+    private UserDTO user;
 }

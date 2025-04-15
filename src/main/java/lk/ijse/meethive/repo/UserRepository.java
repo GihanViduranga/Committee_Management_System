@@ -29,4 +29,10 @@ public interface UserRepository extends JpaRepository<User,String> {
     Optional<User> findByEmail(String email);
 
 
+    @Query("SELECT COUNT(e) FROM User e")
+    int countAll();
+
+    @Query("SELECT COUNT(u) FROM User u WHERE u.isActive = true")
+    int countActiveUsers();
+
 }

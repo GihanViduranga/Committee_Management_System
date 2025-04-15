@@ -22,6 +22,10 @@ public interface UserService {
 
     UserDTO getUserByEmail(String username);
 
+    int getUserCount();
+
+    int getActiveUserCount();
+
     //public User updateUser(int userId, User updatedUser);
 
 }

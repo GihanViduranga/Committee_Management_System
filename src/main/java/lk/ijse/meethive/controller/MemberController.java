@@ -43,7 +43,6 @@ public class MemberController {
     public ResponseEntity<ResponseDTO> getMemberCount(){
         try {
             int memberCount = memberService.getMemberCount();
-            System.out.println(memberCount);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseDTO(VarList.OK,"Member Count Loaded",memberCount));
         }catch (RuntimeException e){

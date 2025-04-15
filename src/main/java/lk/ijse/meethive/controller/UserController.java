@@ -114,44 +114,44 @@ public class UserController {
         }
     }
 
-   /* @PostMapping("/registerUser")
-    public ResponseEntity<ResponseDTO> saveUser(@RequestBody UserDTO userDTO){
-        try {
-            log.atError().log();
-            int res = userService.registerUser(userDTO);
-            switch (res) {
-                case VarList.Created -> {
-                    String token = jwtUtil.generateToken(userDTO);
-                    AuthDTO authDTO = new AuthDTO();
-                    authDTO.setEmail(userDTO.getEmail());
-                    authDTO.setToken(token);
-                    return ResponseEntity.status(HttpStatus.CREATED)
-                            .body(new ResponseDTO(VarList.Created, "Success", authDTO));
-                }
-                case VarList.Not_Acceptable -> {
-                    return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
-                            .body(new ResponseDTO(VarList.Not_Acceptable, "Email Already Used", null));
-                }
-                default -> {
-                    return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-                            .body(new ResponseDTO(VarList.Bad_Gateway, "Error", null));
-                }
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+    /* @PostMapping("/registerUser")
+     public ResponseEntity<ResponseDTO> saveUser(@RequestBody UserDTO userDTO){
+         try {
+             log.atError().log();
+             int res = userService.registerUser(userDTO);
+             switch (res) {
+                 case VarList.Created -> {
+                     String token = jwtUtil.generateToken(userDTO);
+                     AuthDTO authDTO = new AuthDTO();
+                     authDTO.setEmail(userDTO.getEmail());
+                     authDTO.setToken(token);
+                     return ResponseEntity.status(HttpStatus.CREATED)
+                             .body(new ResponseDTO(VarList.Created, "Success", authDTO));
+                 }
+                 case VarList.Not_Acceptable -> {
+                     return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                             .body(new ResponseDTO(VarList.Not_Acceptable, "Email Already Used", null));
+                 }
+                 default -> {
+                     return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                             .body(new ResponseDTO(VarList.Bad_Gateway, "Error", null));
+                 }
+             }
+         } catch (Exception e) {
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+         }
+     }
+ */
+    @PutMapping(value = "/activate/{id}")
+    public ResponseEntity<ResponseDTO> activateUser(@PathVariable int id) {
+        if (userService.changeUserStatus(id, true)) {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.Created, "User Activated", null));
         }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ResponseDTO(VarList.Not_Found, "User Not Found", null));
     }
-*/
-   @PutMapping(value = "/activate/{id}")
-   public ResponseEntity<ResponseDTO> activateUser(@PathVariable int id) {
-       if (userService.changeUserStatus(id, true)) {
-           return ResponseEntity.status(HttpStatus.OK)
-                   .body(new ResponseDTO(VarList.Created, "User Activated", null));
-       }
-       return ResponseEntity.status(HttpStatus.NOT_FOUND)
-               .body(new ResponseDTO(VarList.Not_Found, "User Not Found", null));
-   }
 
     @PutMapping(value = "/deactivate/{id}")
     public ResponseEntity<ResponseDTO> deactivateUser(@PathVariable int id) {
@@ -247,5 +247,31 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/userCount")
+    public ResponseEntity<ResponseDTO> getMemberCount(){
+        try {
+            int memberCount = userService.getUserCount();
+            System.out.println(memberCount);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK,"Member Count Loaded",memberCount));
+        }catch (RuntimeException e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Internal Server Error",e.getMessage()));
+        }
+    }
+
+    @GetMapping("/activeUserCount")
+    public ResponseEntity<ResponseDTO> getActiveUserCount() {
+        try {
+            int activeUserCount = userService.getActiveUserCount();
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseDTO(VarList.OK, "Active User Count Loaded", activeUserCount));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, "Internal Server Error", e.getMessage()));
+        }
+    }
+
 
 }

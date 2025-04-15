@@ -38,6 +38,16 @@ public class MeetingController {
         }
     }
 
+    @GetMapping("/getAllMeetingsToMember")
+    public ResponseEntity<ResponseDTO> getAllMeetingsToMember() {
+        try {
+            return ResponseEntity.ok(new ResponseDTO(VarList.OK,"Meetings fetched successfully",meetingService.getAllMeetings()));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error,"Error occurred while fetching meetings",e.getMessage()));
+        }
+    }
+
     @PutMapping("/update")
     public ResponseEntity<ResponseDTO> updateMeeting(@RequestBody MeetingDTO meetingDTO) {
         try {
